@@ -1,0 +1,21 @@
+//Процедура возвращает массив списков общих друзей пользователя с source_uid с каждым из пользователей target_uids
+var srcId  = Args.source_uid;
+var trgIds = Args.target_uids.split(",");
+var res = [];
+var emptyArray = [];
+var temp = [];
+var i = 0;
+
+while(i < trgIds.length){
+    temp.id = parseInt(trgIds[i]);
+    temp.common_friends
+            = API.friends.getMutual({"source_uid":srcId,
+                                     "target_uid":trgIds[i]});
+    
+    if(temp.common_friends){
+        res = res + [temp];
+    }
+    i = i + 1;
+}
+return res;
+
