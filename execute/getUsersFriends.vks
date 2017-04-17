@@ -1,0 +1,22 @@
+//Процедура возвращает массив списков друзей пользователей, переданных в параметре user_ids
+var idsList = Args.user_ids.split(",");
+var fields  = Args.fields;
+var res = [];
+var emptyArray = [];
+var temp;
+var i = 0;
+
+while(i < idsList.length) {
+    temp = API.friends.get({"user_id":idsList[i],
+                            "fields":fields});
+
+    if(temp.count) {
+        temp.id = parseInt(idsList[i]);
+        res = res + [temp];
+    } else {
+        res = res + [emptyArray];
+    }
+    i = i + 1;
+}
+return res;
+
